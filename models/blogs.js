@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const m = require("mongoose")
 
-const blogSchema = new mongoose.Schema({
+const blogSchema = new m.Schema({
   title: String,
   author: String,
   url: String,
@@ -15,4 +15,4 @@ blogSchema.set("toJSON", {
   }
 })
 
-module.exports = mongoose.model("Blog", blogSchema)
+module.exports = m.model("Blog", blogSchema)
