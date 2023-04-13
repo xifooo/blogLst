@@ -15,4 +15,4 @@ blogSchema.set("toJSON", {
   }
 })
 
-module.exports = m.model("Blog", blogSchema)
+module.exports = m.model("blog", blogSchema)

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
-const logger = require("./utils/logger")
+const logger = require("../utils/logger")
 const password = process.argv[2];
-const url = `mongodb+srv://jyeho:${password}@cluster0.30kp0cf.mongodb.net/BlogLst?retryWrites=true&w=majority`;
+const url = `mongodb+srv://jyeho:${password}@cluster0.30kp0cf.mongodb.net/blogLst?retryWrites=true&w=majority`;
 
 logger.info(`connecting to ${url}`)
 
@@ -32,14 +32,14 @@ const blogSchema = new mongoose.Schema({
     type: Number,
   }
 })
-// blogSchema.set("toJSON", {
-//   transform: (document, returnedObj) => {
-//     returnedObj.id = returnedObj._id.toString()
-//     delete returnedObj._id
-//     delete returnedObj.__v
-//   }
-// })
-const Blog = mongoose.model("BlogLst", blogSchema)
+blogSchema.set("toJSON", {
+  transform: (document, returnedObj) => {
+    returnedObj.id = returnedObj._id.toString()
+    delete returnedObj._id
+    delete returnedObj.__v
+  }
+})
+const Blog = mongoose.model("blog", blogSchema)
 
 
 let oneBlog = new Blog ({
