@@ -8,6 +8,7 @@ mongoose.connect(config.MONGODB_URI, {
   })
   .then(() => {
     console.log('connected to mongoDB')
+    mongoose.set('strictQuery', false)
   })
   .catch(error => {
     console.log(error.message)

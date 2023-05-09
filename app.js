@@ -19,6 +19,7 @@ mongoose
   })
   .then(() => {
     logger.info("connected to MongoDB")
+    mongoose.set('strictQuery', false)
   })
   .catch((error) => {
     logger.error("error connecting to MongoDB", error.message)
