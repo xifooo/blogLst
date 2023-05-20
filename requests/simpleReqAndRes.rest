@@ -1,16 +1,18 @@
-GET http://localhost:3001/api/blogs
+GET http://localhost:3003/api/blogs
 
 ###
 
-POST http://localhost:3001/api/blogs HTTP/1.1
+POST http://localhost:3003/api/blogs HTTP/1.1
 User-Agent: rest-client
 Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
 content-type: application/json
 
 {
-    "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "title": "I wanna be your lover",
+    "author": "Prince",
+    "url": "3r.cx",
+    "likes": 30
 }
 
 ###
-GET http://localhost:3001/api/blogs/
+GET http://localhost:3003/api/blogs/

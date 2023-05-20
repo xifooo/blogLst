@@ -25,21 +25,37 @@ blogRouter.delete("/:id", async (req, res) => {
 
 
 blogRouter.post("/", async (req, res) => {
-  const body = req.body
-
-  if (body.content === undefined) {
-    return res.status(400).json({error: "content missing"}) //400 bad request
-  };
-
+  const body = req.body;
+  
+  if (body === undefined) {
+    return res.status(400).json({ error: "content missing"}) //400 bad request
+  } else if (!(body.title && body.url)) {
+    return res.status(400).json({ error: "400 Bad Request: title or url missing"})
+  } 
   const blogTmp = new Blog({
     title: body.title,
-    author: body.author,
+    author: body.author || "佚名",
     url: body.url,
-    likes: 1
+    // likes: body.likes || 0
+    likes: !body.likes ? 0 : body.likes
   });
-
   const savedBlog = await blogTmp.save()
-  res.json(savedBlog)
+  res.status(201).json(savedBlog)
+
+  // else if (body.hasOwnProperty("title") && body.hasOwnProperty("url")) {
+  // // if (body["title"] && body["url"]) {
+  //   const blogTmp = new Blog({
+  //     title: body.title,
+  //     author: body.author || "佚名",
+  //     url: body.url,
+  //     likes: body.likes || 0
+  //   });
+  //   const savedBlog = await blogTmp.save()
+  //   res.status(201).json(savedBlog)
+  // } 
+  // else {
+  //   res.status(400).json({error: "400 Bad Request: title or url missing"})
+  // }
 })
 
 
