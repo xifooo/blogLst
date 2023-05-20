@@ -25,34 +25,40 @@ blogRouter.delete("/:id", async (req, res) => {
 
 
 blogRouter.post("/", async (req, res) => {
-  const body = req.body
-
-  if (body.content === undefined) {
-    return res.status(400).json({error: "content missing"}) //400 bad request
+  const body = req.body;
+  
+  if (body === undefined) {
+    return res.status(400).json({ error: "content missing"}) //400 bad request
+  } else if (!(body.title && body.url)) {
+    return res.status(400).json({ error: "400 Bad Request: title or url missing"})
   };
 
   const blogTmp = new Blog({
     title: body.title,
-    author: body.author,
+    author: body.author || "佚名",
     url: body.url,
-    likes: 1
-  });
+    // likes: body.likes || 0
+    likes: !body.likes ? 0 : body.likes
+  })
 
   const savedBlog = await blogTmp.save()
-  res.json(savedBlog)
+  res.status(201).json(savedBlog)
 })
 
 
 blogRouter.put("/:id", async (req, res) => {
-  const { title, author, url} = req.body
+  const { title, author, url, likes } = req.body
 
   const updatedBlog = await Blog
     .findByIdAndUpdate(
       req.params.id,
-      { title, author, url},
+      { title, author, url, likes },
       { new: true, runValidators: true, context: "query"}
       )
-  res.json(updatedBlog)
+  if (!updatedBlog) {
+    return res.status(404).json({error: "blog not found"})
+  }
+  res.status(200).json(updatedBlog)
 })
 
 

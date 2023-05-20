@@ -1,3 +1,4 @@
+const config = require("./utils/config")
 const express = require("express")
 const app = express()
 
@@ -6,7 +7,6 @@ const cors = require("cors")
 const blogRouter = require("./controllers/blogs_routers")
 const middleware = require("./utils/middlewares")
 const logger = require("./utils/logger")
-const config = require("./utils/config")
 const mongoose = require("mongoose")
 const path = require("path")
 
@@ -29,6 +29,7 @@ mongoose
 // loading middlewares
 app.use(cors())
 // app.use(express.static(path.join(".", "client", "build")))
+app.use(express.json())
 app.use(middleware.requestLogger)
 
 app.use("/api/blogs", blogRouter)
