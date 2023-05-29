@@ -1,0 +1,57 @@
+GET http://localhost:3003/api/blogs HTTP/1.1
+
+###
+
+GET http://localhost:3003/api/blogs/?id= HTTP/1.1
+
+###
+
+GET http://localhost:3003/api/blogs/init-blogs/2 HTTP/1.1
+
+###
+
+POST http://localhost:3003/api/blogs HTTP/1.1
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+content-type: application/json
+
+{
+    "title": "I wanna be your lover30",
+    "author": "Prince",
+    "url": "3r.cx",
+    "likes": 14
+}
+
+###
+
+PUT http://localhost:3003/api/blogs/?id= HTTP/1.1
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+content-type: application/json
+
+{
+    "title": "I wanna be your lover",
+    "author": "Prince",
+    "url": "3r.cx",
+    "likes": 14
+}
+
+###
+
+DELETE http://localhost:3003/api/blogs/all-blogs HTTP/1.1
+
+###
+
+POST http://localhost:3003/api/blogs HTTP/1.1
+User-Agent: rest-client
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sb25va2FpIiwiaWQiOiI2NDc0MTUxNWFlNzcwZGQ5NGVhN2VmM2EiLCJpYXQiOjE2ODUzMjkxOTQsImV4cCI6MTY4NTMzMjc5NH0.HCyANpyva8JGtrmmXCZZ-g9lfBll61cby8pxwZP0Ggw
+
+{
+    "title": "Sound and vision",
+    "author": "David Bowie",
+    "url": "yourube",
+    "likes": 1000
+}
+
+
