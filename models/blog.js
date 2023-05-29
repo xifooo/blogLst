@@ -1,10 +1,14 @@
-const m = require("mongoose")
+const mongoose = require("mongoose")
 
-const blogSchema = new m.Schema({
+const blogSchema = new mongoose.Schema({
   title: String,
   author: String,
   url: String,
-  likes: Number
+  likes: Number,
+  user: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }]
 })
 
 blogSchema.set("toJSON", {
@@ -15,4 +19,4 @@ blogSchema.set("toJSON", {
   }
 })
 
-module.exports = m.model("blog", blogSchema)
+module.exports = mongoose.model("Blog", blogSchema)

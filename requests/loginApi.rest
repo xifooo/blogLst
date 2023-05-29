@@ -1,0 +1,20 @@
+POST http://localhost:3003/api/login HTTP/1.1
+User-Agent: rest-client
+Content-Type: application/json
+
+{
+    "username": "Porunk",
+    "name": "Double V",
+    "password": "321321123"
+}
+
+###
+
+POST http://localhost:3003/api/login HTTP/1.1
+User-Agent: rest-client
+Content-Type: application/json
+
+{
+    "username": "mlonokai",
+    "password": "123123"
+}
