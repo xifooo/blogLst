@@ -4,16 +4,6 @@ const User = require("../models/user")
 const init_db = require("../utils/init_db")
 const jwt = require("jsonwebtoken")
 
-const getToken = request => {
-  const authorization = request.get("authorization")
-  if (authorization && authorization.startsWith("Bearer ")) {
-    // return authorization.replace("Bearer ", "")
-    return authorization.substring(7)
-  }
-  return null
-}
-
-
 blogsRouter.get("/", async (req, res) => {
   const blogs = await Blog.find({}).populate("user", { "username": 1, "name": 1, "id": 1 })
   res.json(blogs)
@@ -42,20 +32,29 @@ blogsRouter.delete("/:id", async (req, res) => {
 
 
 blogsRouter.post("/", async (req, res) => {
-  const body = req.body;
-  const token = getToken(req)
-  const decodeToken = jwt.verify(token, process.env.SECRET)
+  // const body = req.body;
+  // const token = getToken(req)
+  // const decodeToken = jwt.verify(token, process.env.SECRET)
 
-  if (!decodeToken) {
-    res.status(401).json({ error: "token missing or invalid" })
-    return res.status(304).redirect("/api/login")
-  } else if (body === undefined) {
+  // if (!decodeToken) {
+  //   res.status(401).json({ error: "token missing or invalid" })
+  //   return res.status(304).redirect("/api/login")
+  // } else if (body === undefined) {
+  //   return res.status(400).json({ error: "content missing" }) //400 bad request
+  // } else if (!(body.title && body.url)) {
+  //   return res.status(400).json({ error: "400 Bad Request: title or url missing" })
+  // }
+  
+  // const user = await User.findById(decodeToken.id)
+  const body = req.body
+
+  if (body === undefined) {
     return res.status(400).json({ error: "content missing" }) //400 bad request
   } else if (!(body.title && body.url)) {
     return res.status(400).json({ error: "400 Bad Request: title or url missing" })
   }
 
-  const user = await User.findById(decodeToken.id)
+  const user = await User.findById(req.uid)
 
   const blogTmp = new Blog({
     title: body.title === undefined ? "No title" : body.title,

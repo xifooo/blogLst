@@ -1,4 +1,5 @@
 GET http://localhost:3003/api/blogs HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGx0ZXIiLCJpZCI6IjY0NzQxNTE1YWU3NzBkZDk0ZWE3ZWYzYiIsImlhdCI6MTY4NTM0Nzg5OSwiZXhwIjoxNjg1MzUxNDk5fQ.apLNeXpQgLvFor7DPbGT0A-trqB9vlz2Q1xw9g8t6Vo
 
 ###
 
@@ -45,13 +46,13 @@ DELETE http://localhost:3003/api/blogs/all-blogs HTTP/1.1
 POST http://localhost:3003/api/blogs HTTP/1.1
 User-Agent: rest-client
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sb25va2FpIiwiaWQiOiI2NDc0MTUxNWFlNzcwZGQ5NGVhN2VmM2EiLCJpYXQiOjE2ODUzMjkxOTQsImV4cCI6MTY4NTMzMjc5NH0.HCyANpyva8JGtrmmXCZZ-g9lfBll61cby8pxwZP0Ggw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGx0ZXIiLCJpZCI6IjY0NzQxNTE1YWU3NzBkZDk0ZWE3ZWYzYiIsImlhdCI6MTY4NTM0Nzg5OSwiZXhwIjoxNjg1MzUxNDk5fQ.apLNeXpQgLvFor7DPbGT0A-trqB9vlz2Q1xw9g8t6Vo
 
 {
-    "title": "Sound and vision",
+    "title": "Heros",
     "author": "David Bowie",
-    "url": "yourube",
-    "likes": 1000
+    "url": "urube",
+    "likes": 256
 }
 
 
