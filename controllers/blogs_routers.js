@@ -2,7 +2,7 @@ const blogsRouter = require("express").Router()
 const Blog = require("../models/blog")
 const User = require("../models/user")
 const init_db = require("../utils/init_db")
-const jwt = require("jsonwebtoken")
+const TokenExtractor = require("../utils/middlewares").TokenExtractor
 
 blogsRouter.get("/all-blogs", async (req, res) => {
   const blogs = await Blog
@@ -40,8 +40,7 @@ blogsRouter.get("/:id", async (req, res) => {
 })
 
 
-blogsRouter.delete("/:id", async (req, res) => {
-  // blog 和 user.blogs 的联动删除
+blogsRouter.delete("/:id", TokenExtractor, async (req, res) => {
   const user = await User.findById(req.uid)
 
   await Blog.findByIdAndRemove(req.params.id)
@@ -57,7 +56,7 @@ blogsRouter.delete("/:id", async (req, res) => {
 })
 
 
-blogsRouter.post("/", async (req, res) => {
+blogsRouter.post("/", TokenExtractor, async (req, res) => {
   const body = req.body
 
   if (body === undefined) {
@@ -83,7 +82,7 @@ blogsRouter.post("/", async (req, res) => {
 })
 
 
-blogsRouter.put("/:id", async (req, res) => {
+blogsRouter.put("/:id", TokenExtractor, async (req, res) => {
   const { title, author, url, likes } = req.body
   const updatedBlog = await Blog
     .findByIdAndUpdate(
