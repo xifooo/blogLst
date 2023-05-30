@@ -1,6 +1,7 @@
 GET http://localhost:3003/api/blogs HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGx0ZXIiLCJpZCI6IjY0NzQxNTE1YWU3NzBkZDk0ZWE3ZWYzYiIsImlhdCI6MTY4NTM0Nzg5OSwiZXhwIjoxNjg1MzUxNDk5fQ.apLNeXpQgLvFor7DPbGT0A-trqB9vlz2Q1xw9g8t6Vo
 
+
 ###
 
 GET http://localhost:3003/api/blogs/?id= HTTP/1.1
@@ -53,6 +54,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhlb
     "author": "David Bowie",
     "url": "urube",
     "likes": 256
+
 }
 
 

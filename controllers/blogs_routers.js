@@ -40,9 +40,9 @@ blogsRouter.get("/:id", async (req, res) => {
 })
 
 
+
 blogsRouter.delete("/:id", TokenExtractor, async (req, res) => {
   const user = await User.findById(req.uid)
-
   await Blog.findByIdAndRemove(req.params.id)
 
   for (i = 0; i < user.blogs.length; i++) {
@@ -80,6 +80,7 @@ blogsRouter.post("/", TokenExtractor, async (req, res) => {
   await user.save()
   res.status(201).json(savedBlog)
 })
+
 
 
 blogsRouter.put("/:id", TokenExtractor, async (req, res) => {
