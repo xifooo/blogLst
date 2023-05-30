@@ -2,23 +2,9 @@ const usersRouter = require("express").Router()
 const User = require("../models/user")
 const bcrypt = require("bcrypt")
 const init_db = require("../utils/init_db")
-const jwt = require("jsonwebtoken")
 
-// const getToken = request => {
-//   const authorization = request.get("authorization")
-//   if (authorization && authorization.toLowerCase().startsWith("Bearer ")) {
-//     return authorization.replace("Bearer ", "")
-//   }
-//   return null
-// }
 
 usersRouter.get("/", async (req, res) => {
-  // const token = getToken(req)
-  // const decodeToken = jwt.verify(token, process.env.SECRET)
-  // if (!decodeToken.id) {
-  //   return res.status(401).json({ error: "token missing or invalid" })
-  // }
-
   const users = await User
     .find({})
     .populate("blogs", { "title": 1, "url": 1, "likes": 1 })
@@ -37,12 +23,6 @@ usersRouter.get("/:id", async (req, res) => {
 
 
 usersRouter.post("/", async (req, res) => {
-  // const token = getToken(req)
-  // const decodeToken = jwt.verify(token, process.env.SECRET)
-  // if (!decodeToken.id) {
-  //   return res.status(401).json({ error: "token missing or invalid" })
-  // }
-
   const { username, name, password } = req.body
 
   if (username.length < 3 || password < 3) {
