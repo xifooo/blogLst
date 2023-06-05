@@ -37,7 +37,7 @@ app.use(middleware.requestLogger)
 app.use("/api/login", loginRouter)
 
 // app.use(middleware.TokenExtractor)
-app.use("/api/blogs", TokenExtractor, blogsRouter)
+app.use("/api/blogs", middleware.TokenExtractor, blogsRouter)
 app.use("/api/users", usersRouter)
 
 app.use(middleware.unknownEndpoint)
