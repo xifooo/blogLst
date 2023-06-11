@@ -12,6 +12,7 @@ import BlogRow from "./components/BlogRow.js"
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  
   const [errorMessage, setErrorMessage] = useState(null)
   const [user, setUser] = useState(null)
 
