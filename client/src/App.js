@@ -85,25 +85,32 @@ const App = () => {
       .catch(error => setErrorMessage(`Some errors occupying ::: ${error}`))
   }
 
-  const addOneLike = blogObj => {
-    const blog = {
-      ...blogObj,
-      likes: blogObj.likes + 1
-    }
+  const addOneLike = blogId => {
+    const blog = blogs.find(item => item.id === blogId)
+    const changedBlog = { ...blog, likes: blog.likes + 1 }
     blogService
-      .put(blog)
-      .then(returnedBlog => setBlogs(blogs.concat(returnedBlog)))
-      .catch(error => setErrorMessage(`Some errors occupying ::: ${error}`))
+      .update(blogId, changedBlog)
+      .then(returnedBlog =>
+        setBlogs(blogs.map(n => n.id !== blogId ? n : returnedBlog))
+      )
+      .catch(error =>
+        setErrorMessage(`Some errors occupying ::: ${error}`)
+      )
   }
 
-  const delBlog = blogObj => {
-    const confirm = window.alert(`Remove this blog : ${blogObj.title}`)
+  const delBlog = blogId => {
+    const blog = blogs.find(item => item.id === blogId)
+    const confirm = window.alert(`Remove this blog : ${blog.title}`)
 
     if (confirm) {
       blogService
-        .remove(blogObj.id)
-        .then(setBlogs(blogs.filter(item => item.id !== blogObj.id)))
-        .catch(error => setErrorMessage(`Some errors occupying ::: ${error}`))
+        .remove(blogId)
+        .then(res =>
+          setBlogs(blogs.filter(item => item.id !== blogId))
+        )
+        .catch(error =>
+          setErrorMessage(`Some errors occupying ::: ${error}`)
+        )
     }
   }
 
@@ -126,14 +133,16 @@ const App = () => {
           <Togglable buttonLabel="create a blog" ref={blogFormRef}>
             <BlogForm addBlog={addBlog} />
           </Togglable>
-          {blogs.map(item =>
-            <BlogRow
-              key={item.id}
-              blog={item}
-              addOneLike={() => addOneLike(item)}
-              delBlog={() => delBlog(item)}
-            />
-          )}
+          <ul className="no-bullets">
+            {blogs.map(item =>
+              <BlogRow
+                key={item.id}
+                blog={item}
+                addOneLike={() => addOneLike(item.id)}
+                delBlog={() => delBlog(item.id)}
+              />
+            )}
+          </ul>
         </div>
       }
 

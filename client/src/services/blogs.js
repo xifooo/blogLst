@@ -1,5 +1,4 @@
 import axios from "axios"
-import { config } from "dotenv"
 
 const bashUrl = "http://localhost:3003/api/blogs"
 
@@ -25,20 +24,20 @@ const create = async (newObject) => {
   return res.data
 }
 
-const put = async blogObj => {
+const update = async (id, blogObj) => {
   const config = {
     headers: { "Authorization": token }
   }
-  const res = await axios.put(bashUrl, blogObj, config)
+  const res = await axios.put(`${bashUrl}/${id}`, blogObj, config)
   return res.data
 }
 
-const remove = async blogId => {
+const remove = async id => {
   const config = {
     headers: { "Authorization": token }
   }
-  await axios.delete(bashUrl, blogId, config)
+  await axios.delete(`${bashUrl}/${id}`, config)
 }
 
 
-export default { getAll, create, put, remove, setToken }
+export default { getAll, create, update, remove, setToken }

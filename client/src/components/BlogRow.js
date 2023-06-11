@@ -1,9 +1,18 @@
 const BlogRow = prop => {
+  const likesNumStyle = {
+    color: "red"
+  }
   return (
-    <li> 
-      {prop.blog.title} ::: {prop.blog.author} 
-      <button onClick={prop.addOneLike}> @LIKE@ </button>
-      <button onClick={prop.delBlog}> #DELETE# </button>
+    <li>
+      <h3>
+        {prop.blog.title}   
+        <button onClick={prop.delBlog}> #DELETE# </button> | 
+        <span style={likesNumStyle}> {prop.blog.likes} </span>
+        <button onClick={prop.addOneLike}> @LIKE@ </button>
+        
+      </h3>
+      <p> {prop.blog.author} {prop.blog.url} </p>
+      <hr />
     </li>
   )
 }
