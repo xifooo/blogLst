@@ -1,20 +1,28 @@
-const BlogRow = prop => {
+import PropType from "prop-types"
+
+const BlogRow = ({ blog, addOneLike, delBlog }) => {
   const likesNumStyle = {
     color: "red"
   }
   return (
     <li>
       <h3>
-        {prop.blog.title}   
-        <button onClick={prop.delBlog}> #DELETE# </button> | 
-        <span style={likesNumStyle}> {prop.blog.likes} </span>
-        <button onClick={prop.addOneLike}> @LIKE@ </button>
-        
+        {blog.title}
+        <button onClick={delBlog}> #DELETE# </button> |
+        <span style={likesNumStyle}> {blog.likes} </span>
+        <button onClick={addOneLike}> @LIKE@ </button>
+
       </h3>
-      <p> {prop.blog.author} {prop.blog.url} </p>
+      <p> {blog.author} {blog.url} </p>
       <hr />
     </li>
   )
+}
+
+BlogRow.propTypes = {
+  blog: PropType.object.isRequired,
+  addOneLike: PropType.func.isRequired,
+  delBlog: PropType.func.isRequired
 }
 
 export default BlogRow

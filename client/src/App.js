@@ -12,7 +12,7 @@ import BlogRow from "./components/BlogRow.js"
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  
+
   const [errorMessage, setErrorMessage] = useState(null)
   const [user, setUser] = useState(null)
 
@@ -50,7 +50,7 @@ const App = () => {
         setUser(null)
       }, 5000)
     }
-  };
+  }
 
   const handleLogout = () => {
     try {
@@ -68,7 +68,7 @@ const App = () => {
         setErrorMessage(null)
       }, 5000)
     }
-  };
+  }
 
   const blogFormRef = useRef()
 
@@ -106,7 +106,7 @@ const App = () => {
     if (confirm) {
       blogService
         .remove(blogId)
-        .then(res =>
+        .then(() =>
           setBlogs(blogs.filter(item => item.id !== blogId))
         )
         .catch(error =>
