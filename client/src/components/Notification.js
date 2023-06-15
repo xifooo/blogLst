@@ -1,4 +1,4 @@
-import PropType from "prop-types"
+// import PropTypes from "prop-types"
 
 const Notification = ({ message }) => {
   if (message === null) {
@@ -7,8 +7,8 @@ const Notification = ({ message }) => {
     return <div className="error"> {message} </div>
   }
 }
-Notification.propTypes = {
-  message: PropType.object.isRequired
-}
+// Notification.propTypes = {
+//   message: PropTypes.object.isRequired
+// }
 
 export default Notification

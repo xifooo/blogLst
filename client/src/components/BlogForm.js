@@ -1,5 +1,5 @@
 import { useState } from "react"
-import PropType from "prop-types"
+import PropTypes from "prop-types"
 
 const BlogForm = ({ addBlog }) => {
   const [newBlog, setNewBlog] = useState({
@@ -56,17 +56,42 @@ const BlogForm = ({ addBlog }) => {
   }
   return (
     <form onSubmit={handleAddBlog}>
-      <label>Title: <input name="title" value={newBlog.title} onChange={handleTitleChange} /> </label> <br />
-      <label>Author: <input name="author" value={newBlog.author} onChange={handleAuthorChange} /> </label> <br />
-      <label>Url: <input name="url" value={newBlog.url} onChange={handleUrlChange} /> </label> <br />
-      <label>Likes: <input name="likes" value={newBlog.likes} onChange={handleLikesChange} /> </label> <br />
+      <label>Title:</label>
+      <input
+        name="title"
+        value={newBlog.title}
+        onChange={handleTitleChange}
+        placeholder="title" />
+      <br />
+      <label>Author:</label>
+      <input
+        name="author"
+        value={newBlog.author}
+        onChange={handleAuthorChange}
+        placeholder="author" />
+      <br />
+      <label>Url:</label>
+      <input
+        name="url"
+        value={newBlog.url}
+        onChange={handleUrlChange}
+        placeholder="url" />
+      <br />
+      <label>Likes:</label>
+      <input
+        name="likes"
+        value={newBlog.likes}
+        onChange={handleLikesChange}
+        placeholder="likes"
+      />
+      <br />
       <button type="submit"> SAVE </button>
     </form>
   )
 }
 
 BlogForm.propTypes = {
-  addBlog: PropType.func.isRequired
+  addBlog: PropTypes.func.isRequired
 }
 
 export default BlogForm

@@ -81,7 +81,7 @@ const App = () => {
       .create(blog)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
-        blogFormRef.current.toggle.toggleVisibility()
+        blogFormRef.current.toggleVisibility()
       })
       .catch(error => setErrorMessage(`Some errors occupying ::: ${error}`))
   }
@@ -134,6 +134,7 @@ const App = () => {
           <Togglable buttonLabel="create a blog" ref={blogFormRef}>
             <BlogForm addBlog={addBlog} />
           </Togglable>
+
           <ul className="no-bullets">
             {blogs.map(item =>
               <BlogRow
