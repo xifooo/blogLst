@@ -1,28 +1,74 @@
-import PropType from "prop-types"
+import { useState } from "react"
+import PropTypes from "prop-types"
 
 const BlogRow = ({ blog, addOneLike, delBlog }) => {
-  const likesNumStyle = {
-    color: "red"
+  const [visibilityOfRest, setVisibilityOfRest] = useState(false)
+
+  const hideWhenVisible = { display: visibilityOfRest ? "none" : "" }
+  const showWhenVisible = { display: visibilityOfRest ? "" : "none" }
+
+  const toggleVisibility = () => {
+    return setVisibilityOfRest(!visibilityOfRest)
+  }
+
+  const blogStyle = {
+    paddingTop: 10,
+    paddingLeft: 2,
+    border: "solid",
+    borderWidth: 1,
+    marginBottom: 5
+  }
+  const horizontalLineStyle = {
+    width: "50%",
+    height: 1
+  }
+  const paragraphStyle = {
+    color: "rgb(77,77,77)"
   }
   return (
     <li>
-      <h3>
-        {blog.title}
-        <button onClick={delBlog}> #DELETE# </button> |
-        <span style={likesNumStyle}> {blog.likes} </span>
-        <button onClick={addOneLike}> @LIKE@ </button>
+      <div style={blogStyle}>
+        <h3> {blog.title} </h3>
+        <hr style={horizontalLineStyle} />
+        <p>
+          <span> Author: </span>
+          <span> {blog.author} </span>
+        </p>
 
-      </h3>
-      <p> {blog.author} {blog.url} </p>
-      <hr />
+        <div style={hideWhenVisible}>
+          <p>
+            <button onClick={toggleVisibility}> View </button> &nbsp;
+            <button onClick={delBlog}> Delete </button> &nbsp;
+            <button onClick={addOneLike}> Like </button>
+          </p>
+
+        </div>
+
+        <div style={showWhenVisible}>
+          <p style={paragraphStyle}>
+            <span> URL </span>
+            <span>{blog.url}</span>
+          </p>
+          <p style={paragraphStyle}>
+            <span> Likes </span>
+            <span data-testid="t5.15">{blog.likes}</span>
+          </p>
+          <p>
+            <button onClick={toggleVisibility}>Hide</button> &nbsp;
+            <button onClick={delBlog}>Delete</button> &nbsp;
+            <button onClick={addOneLike}>Like</button>
+          </p>
+        </div>
+
+      </div>
     </li>
   )
 }
 
 BlogRow.propTypes = {
-  blog: PropType.object.isRequired,
-  addOneLike: PropType.func.isRequired,
-  delBlog: PropType.func.isRequired
+  blog: PropTypes.object.isRequired,
+  addOneLike: PropTypes.func.isRequired,
+  delBlog: PropTypes.func.isRequired
 }
 
 export default BlogRow
