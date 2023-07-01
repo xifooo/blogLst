@@ -4,13 +4,14 @@ const app = express()
 
 const cors = require("cors")
 
+const testingRouter = require("./controllers/testing_routers")
 const loginRouter = require("./controllers/login_routers")
 const usersRouter = require("./controllers/users_routers")
 const blogsRouter = require("./controllers/blogs_routers")
 const middleware = require("./utils/middlewares")
 const logger = require("./utils/logger")
 const mongoose = require("mongoose")
-const path = require("path")
+// const path = require("path")
 
 logger.info(`connecting to ${config.MONGODB_URI}`)
 
@@ -35,7 +36,7 @@ app.use(express.json())
 app.use(middleware.requestLogger)
 
 app.use("/api/login", loginRouter)
-
+app.use("/api/tests", testingRouter)
 // app.use(middleware.TokenExtractor)
 app.use("/api/blogs", middleware.TokenExtractor, blogsRouter)
 app.use("/api/users", usersRouter)

@@ -8,12 +8,13 @@ const setToken = newToken => {
   token = `Bearer ${newToken}`
 }
 
-const getAll = () => {
+const getAll = async () => {
   const config = {
     headers: { "Authorization": token }
   }
   const res = axios.get(bashUrl, config)
-  return res.then(returnedBlogs => returnedBlogs.data)
+  const returnedBlogs = await res
+  return returnedBlogs.data
 }
 
 const create = async (newObject) => {

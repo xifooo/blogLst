@@ -12,26 +12,29 @@ import BlogRow from "./components/BlogRow.js"
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-
-  const [errorMessage, setErrorMessage] = useState(null)
   const [user, setUser] = useState(null)
-
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
+    // inspect the token expiresIn and user JSON
     const loggedUserJSON = window.localStorage.getItem("loggedBlogAppUser")
+
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
+      const tokenExpiresIn = user["expiresIn"]
+      if (tokenExpiresIn < new Date()) {
+        window.localStorage.removeItem("loggedBlogAppUser")
+        setUser(null)
+        return
+      }
       blogService.setToken(user.token)
       setUser(user)
+      blogService
+        .getAll()
+        .then(returnedBlogs => {
+          setBlogs(returnedBlogs)
+        })
     }
-  }, [])
-
-  useEffect(() => {
-    blogService
-      .getAll()
-      .then(returnedBlogs => {
-        setBlogs(returnedBlogs)
-      })
   }, [])
 
 
@@ -99,6 +102,50 @@ const App = () => {
       )
   }
 
+  function mergeSort(arr) {
+    if (arr.length <= 1) {
+      return arr
+    }
+
+    const mid = Math.floor(arr.length / 2)
+    const leftArr = arr.slice(0, mid)
+    const rightArr = arr.slice(mid)
+
+    return merge(mergeSort(leftArr), mergeSort(rightArr))
+  }
+
+  function merge(leftArr, rightArr) {
+    let i = 0, j = 0
+    const mergedArr = []
+
+    while (i < leftArr.length && j < rightArr.length) {
+      if (leftArr[i].likes > rightArr[j].likes) {
+        mergedArr.push(leftArr[i])
+        i++
+      } else {
+        mergedArr.push(rightArr[j])
+        j++
+      }
+    }
+
+    while (i < leftArr.length) {
+      mergedArr.push(leftArr[i])
+      i++
+    }
+
+    while (j < rightArr.length) {
+      mergedArr.push(rightArr[j])
+      j++
+    }
+
+    return mergedArr
+  }
+
+  const blogsToShow = () => {
+    const sortedBlogs = mergeSort(blogs)
+    return sortedBlogs
+  }
+
   const delBlog = blogId => {
     const blog = blogs.find(item => item.id === blogId)
     const confirm = window.alert(`Remove this blog : ${blog.title}`)
@@ -120,23 +167,23 @@ const App = () => {
       <h1> BlogLst </h1>
       <Notification message={errorMessage} />
 
-      {!user &&
-        <Togglable buttonLabel="login">
-          <LoginForm loginToAccount={loginToAccount} />
-        </Togglable>
+      {!user && <LoginForm loginToAccount={loginToAccount} />
+        // <Togglable buttonLabel="login">
+        //   <LoginForm loginToAccount={loginToAccount} />
+        // </Togglable>
       }
 
       {user &&
         <div>
           <h3>
-            {user.username} logged-in ::: <button onClick={handleLogout}> Logout </button>
+            {user.username} logged-in ::: <button onClick={handleLogout} data-cy="logout-button"> Logout </button>
           </h3>
           <Togglable buttonLabel="create a blog" ref={blogFormRef}>
             <BlogForm addBlog={addBlog} />
           </Togglable>
 
           <ul className="no-bullets">
-            {blogs.map(item =>
+            {blogsToShow().map(item =>
               <BlogRow
                 key={item.id}
                 blog={item}

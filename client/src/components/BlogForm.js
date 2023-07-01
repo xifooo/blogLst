@@ -85,7 +85,7 @@ const BlogForm = ({ addBlog }) => {
         placeholder="likes"
       />
       <br />
-      <button type="submit"> SAVE </button>
+      <button type="submit" data-cy="blog-save-button"> SAVE </button>
     </form>
   )
 }
