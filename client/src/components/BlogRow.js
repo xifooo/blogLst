@@ -37,9 +37,9 @@ const BlogRow = ({ blog, addOneLike, delBlog }) => {
 
         <div style={hideWhenVisible}>
           <p>
-            <button onClick={toggleVisibility}> View </button> &nbsp;
-            <button onClick={delBlog}> Delete </button> &nbsp;
-            <button onClick={addOneLike}> Like </button>
+            <button onClick={toggleVisibility} data-cy="view-button"> View </button> &nbsp;
+            <button onClick={delBlog} data-cy="delete-button"> Delete </button> &nbsp;
+            <button onClick={addOneLike} data-cy="like-button"> Like </button>
           </p>
 
         </div>
@@ -54,9 +54,12 @@ const BlogRow = ({ blog, addOneLike, delBlog }) => {
             <span data-testid="t5.15">{blog.likes}</span>
           </p>
           <p>
-            <button onClick={toggleVisibility}>Hide</button> &nbsp;
+            <button onClick={toggleVisibility} data-cy="hide-button"> Hide </button> &nbsp;
+            <button onClick={delBlog} data-cy="delete-button"> Delete </button> &nbsp;
+            <button onClick={addOneLike} data-cy="like-button"> Like </button>
+            {/* <button onClick={toggleVisibility}>Hide</button> &nbsp;
             <button onClick={delBlog}>Delete</button> &nbsp;
-            <button onClick={addOneLike}>Like</button>
+            <button onClick={addOneLike}>Like</button> */}
           </p>
         </div>
 
