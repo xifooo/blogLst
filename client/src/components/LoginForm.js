@@ -1,47 +1,80 @@
-import { useState } from "react"
-import PropTypes from "prop-types"
+import useField from "../hooks/useField"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
 
-const LoginForm = ({ loginToAccount }) => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+import {
+  loginToAccount,
+  logoutFromAccount,
+  setLocalAccount,
+} from "../reducers/userReducer"
+import { useNavigate } from "react-router-dom"
+import { sendToMessage } from "../reducers/messageReducer"
+
+const LoginForm = () => {
+  const uname = useField("text")
+  const passwd = useField("text")
+
+  const dispatch = useDispatch()
+
+  const userState = useSelector((state) => state.user.currentUser)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    try {
+      if (!userState) {
+        const loggedUserJSON = window.localStorage.getItem("loggedBlogAppUser")
+        console.log(`loggedUserJSON: ${loggedUserJSON}`)
+        if (loggedUserJSON !== null || loggedUserJSON !== undefined) {
+          const userLocal = JSON.parse(loggedUserJSON)
+          if (userLocal) {
+            const jwt = userLocal.tokenExpiresIn
+            console.log(`jwt: ${jwt}`)
+            if (jwt && jwt > new Date()) {
+              window.localStorage.removeItem("loggedBlogAppUser")
+              dispatch(logoutFromAccount())
+            } else {
+              dispatch(setLocalAccount(userLocal))
+            }
+          }
+        }
+      }
+    } catch (exception) {
+      dispatch(sendToMessage(`Some error occupyed:::${exception}`, 9))
+    }
+  }, [])
 
   const handleLogin = (e) => {
     try {
       e.preventDefault()
-      loginToAccount({ username, password })
+      dispatch(
+        loginToAccount({ username: uname.value, password: passwd.value })
+      )
+      window.localStorage.setItem(
+        "loggedBlogAppUser",
+        JSON.stringify(userState)
+      )
+      navigate("/blogs")
+      dispatch(sendToMessage(`welcome to blog app! ${uname.value}`, 5))
     } catch (exception) {
-      window.alert(`Wrong occupying ::: ${exception}`)
+      dispatch(
+        sendToMessage(`Some error happening when login::: ${exception}`, 5)
+      )
     }
   }
   return (
     <form onSubmit={handleLogin}>
-      <label>
+      <p>
         username:
-        <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </label>
-      <br />
-      <label>
+        <input {...uname} />
+      </p>
+      <p>
         password:
-        <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </label>
+        <input {...passwd} />
+      </p>
       <br />
-      <button type="submit"> Login </button>
+      <button type="submit">Login</button>
     </form>
   )
-}
-
-LoginForm.propTypes = {
-  loginToAccount: PropTypes.func.isRequired
 }
 
 export default LoginForm

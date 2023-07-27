@@ -47,12 +47,13 @@
 
 Cypress.Commands.add("login", ({ username, password }) => {
   cy.request("POST", "http://localhost:3003/api/login", {
-    username, password
+    username,
+    password,
   }).then(({ body }) => {
-    localStorage.setItem("loggedBlogAppUser", JSON.stringify(body))
-    cy.visit("http://localhost:3000")
-  })
-})
+    localStorage.setItem("loggedBlogAppUser", JSON.stringify(body));
+    cy.visit("http://localhost:3000");
+  });
+});
 
 Cypress.Commands.add("createSomeBlogs", () => {
   const initialBlogs = [
@@ -60,36 +61,38 @@ Cypress.Commands.add("createSomeBlogs", () => {
       title: "Under pressure",
       author: "david bovi",
       url: "www.baidu.com",
-      likes: 32
+      likes: 32,
     },
     {
       title: "Get it by your hands",
       author: "chars",
       url: "youtube.com",
-      likes: 31
+      likes: 31,
     },
     {
       title: "Good times bad times",
       author: "Zeed",
       url: "spotify.com",
-      likes: 5
+      likes: 5,
     },
     {
       title: "Smell like teen spirit",
       author: "Nirvana",
       url: "junglerocknroll.com",
-      likes: 100
-    }
-  ]
+      likes: 100,
+    },
+  ];
   for (let i = 0; i < initialBlogs.length; i++) {
     cy.request({
       url: "http://localhost:3003/api/blogs",
       method: "POST",
       body: initialBlogs[i],
       headers: {
-        "Authorization": `Bearer ${JSON.parse(localStorage.getItem("loggedBlogAppUser")).token}`
-      }
-    })
-    cy.visit("http://localhost:3000")
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("loggedBlogAppUser")).token
+        }`,
+      },
+    });
+    cy.visit("http://localhost:3000");
   }
-})
+});

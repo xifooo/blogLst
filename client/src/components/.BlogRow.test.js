@@ -6,27 +6,22 @@ import { act } from "react-dom/test-utils"
 
 import BlogRow from "./BlogRow"
 
-
 describe("<BlogRow />", () => {
-
   beforeEach(() => {
     const blog = {
       title: "Sound and Vision",
       author: "David Bowie",
       url: "youtube.com",
-      likes: 30
+      likes: 30,
     }
 
     const mockAddOneLike = jest.fn()
     const mockDelBlog = jest.fn()
 
-    render(<BlogRow
-      blog={blog}
-      addOneLike={mockAddOneLike}
-      delBlog={mockDelBlog}
-    />)
+    render(
+      <BlogRow blog={blog} addOneLike={mockAddOneLike} delBlog={mockDelBlog} />
+    )
   })
-
 
   test("Test 5.13: demonstrates only both title and author of one Blog by default", () => {
     expect(screen.getByText("Sound and Vision")).toBeDefined()
@@ -52,23 +47,20 @@ describe("<BlogRow />", () => {
   })
 })
 
-
 test("Test 5.15: double-clicking the 'Like' button calls event handler twice", () => {
   const blog = {
     title: "Sound and Vision",
     author: "David Bowie",
     url: "youtube.com",
-    likes: 30
+    likes: 30,
   }
 
-  var mockAddOneLike = jest.fn(x => x * 2)
-  const mockDelBlog = jest.fn(x => x * 3)
+  var mockAddOneLike = jest.fn((x) => x * 2)
+  const mockDelBlog = jest.fn((x) => x * 3)
 
-  render(<BlogRow
-    blog={blog}
-    addOneLike={mockAddOneLike}
-    delBlog={mockDelBlog}
-  />)
+  render(
+    <BlogRow blog={blog} addOneLike={mockAddOneLike} delBlog={mockDelBlog} />
+  )
 
   act(() => {
     userEvent.click(screen.getByRole("button", { name: "Like" }))
@@ -83,4 +75,3 @@ test("Test 5.15: double-clicking the 'Like' button calls event handler twice", (
 
   expect(mockAddOneLike.mock.calls).toHaveLength(2)
 })
-

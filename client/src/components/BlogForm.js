@@ -1,97 +1,46 @@
-import { useState } from "react"
-import PropTypes from "prop-types"
+import useField from "../hooks/useField"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { createBlog } from "../reducers/blogsReducer"
+import { sendToMessage } from "../reducers/messageReducer"
 
-const BlogForm = ({ addBlog }) => {
-  const [newBlog, setNewBlog] = useState({
-    title: "",
-    author: "",
-    url: "",
-    likes: 0
-  })
+const BlogForm = () => {
+  const blogTitle = useField("text")
+  const blogAuthor = useField("text")
+  const blogUrl = useField("text")
 
-  const handleTitleChange = e => {
-    setNewBlog({
-      ...newBlog,
-      title: e.target.value
-    })
-  }
-  const handleAuthorChange = e => {
-    setNewBlog({
-      ...newBlog,
-      author: e.target.value
-    })
-  }
-  const handleUrlChange = e => {
-    setNewBlog({
-      ...newBlog,
-      url: e.target.value
-    })
-  }
-  const handleLikesChange = e => {
-    setNewBlog({
-      ...newBlog,
-      likes: e.target.value
-    })
-  }
+  const dispatch = useDispatch()
 
-  const handleAddBlog = e => {
+  const navigate = useNavigate()
+
+  const handleSubmit = (e) => {
     try {
       e.preventDefault()
-      addBlog({
-        title: newBlog.title,
-        author: newBlog.author,
-        url: newBlog.url,
-        likes: newBlog.likes || 0
-      })
-      setNewBlog({
-        title: "",
-        author: "",
-        url: "",
-        likes: 0
-      })
+      dispatch(
+        createBlog({
+          title: blogTitle.value,
+          author: blogAuthor.value,
+          url: blogUrl.value,
+          likes: 0,
+        })
+      )
+      navigate("/blogs")
+      dispatch(sendToMessage(`new blog: ${blogTitle.value} created`, 5))
     } catch (exception) {
-      window.alert(`Wrong occupying ::: ${exception}`)
+      dispatch(sendToMessage(`Some error occupyed:::${exception}`, 5))
     }
-
   }
   return (
-    <form onSubmit={handleAddBlog}>
+    <form onSubmit={handleSubmit}>
       <label>Title:</label>
-      <input
-        name="title"
-        value={newBlog.title}
-        onChange={handleTitleChange}
-        placeholder="title" />
-      <br />
+      <input {...blogTitle} />
       <label>Author:</label>
-      <input
-        name="author"
-        value={newBlog.author}
-        onChange={handleAuthorChange}
-        placeholder="author" />
-      <br />
+      <input {...blogAuthor} />
       <label>Url:</label>
-      <input
-        name="url"
-        value={newBlog.url}
-        onChange={handleUrlChange}
-        placeholder="url" />
-      <br />
-      <label>Likes:</label>
-      <input
-        name="likes"
-        value={newBlog.likes}
-        onChange={handleLikesChange}
-        placeholder="likes"
-      />
-      <br />
-      <button type="submit" data-cy="blog-save-button"> SAVE </button>
+      <input {...blogUrl} />
+      <button type="submit">SAVE</button>
     </form>
   )
-}
-
-BlogForm.propTypes = {
-  addBlog: PropTypes.func.isRequired
 }
 
 export default BlogForm

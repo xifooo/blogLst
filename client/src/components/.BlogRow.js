@@ -16,14 +16,14 @@ const BlogRow = ({ blog, addOneLike, delBlog }) => {
     paddingLeft: 2,
     border: "solid",
     borderWidth: 1,
-    marginBottom: 5
+    marginBottom: 5,
   }
   const horizontalLineStyle = {
     width: "50%",
-    height: 1
+    height: 1,
   }
   const paragraphStyle = {
-    color: "rgb(77,77,77)"
+    color: "rgb(77,77,77)",
   }
   return (
     <li>
@@ -37,11 +37,18 @@ const BlogRow = ({ blog, addOneLike, delBlog }) => {
 
         <div style={hideWhenVisible}>
           <p>
-            <button onClick={toggleVisibility} data-cy="view-button"> View </button> &nbsp;
-            <button onClick={delBlog} data-cy="delete-button"> Delete </button> &nbsp;
-            <button onClick={addOneLike} data-cy="like-button"> Like </button>
+            <button onClick={toggleVisibility} data-cy="view-button">
+              View
+            </button>
+            &nbsp;
+            <button onClick={delBlog} data-cy="delete-button">
+              Delete
+            </button>
+            &nbsp;
+            <button onClick={addOneLike} data-cy="like-button">
+              Like
+            </button>
           </p>
-
         </div>
 
         <div style={showWhenVisible}>
@@ -54,15 +61,22 @@ const BlogRow = ({ blog, addOneLike, delBlog }) => {
             <span data-testid="t5.15">{blog.likes}</span>
           </p>
           <p>
-            <button onClick={toggleVisibility} data-cy="hide-button"> Hide </button> &nbsp;
-            <button onClick={delBlog} data-cy="delete-button"> Delete </button> &nbsp;
-            <button onClick={addOneLike} data-cy="like-button"> Like </button>
+            <button onClick={toggleVisibility} data-cy="hide-button">
+              Hide
+            </button>
+            &nbsp;
+            <button onClick={delBlog} data-cy="delete-button">
+              Delete
+            </button>
+            &nbsp;
+            <button onClick={addOneLike} data-cy="like-button">
+              Like
+            </button>
             {/* <button onClick={toggleVisibility}>Hide</button> &nbsp;
             <button onClick={delBlog}>Delete</button> &nbsp;
             <button onClick={addOneLike}>Like</button> */}
           </p>
         </div>
-
       </div>
     </li>
   )
@@ -71,7 +85,7 @@ const BlogRow = ({ blog, addOneLike, delBlog }) => {
 BlogRow.propTypes = {
   blog: PropTypes.object.isRequired,
   addOneLike: PropTypes.func.isRequired,
-  delBlog: PropTypes.func.isRequired
+  delBlog: PropTypes.func.isRequired,
 }
 
 export default BlogRow

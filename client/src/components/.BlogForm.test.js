@@ -6,7 +6,7 @@ import { act } from "react-dom/test-utils"
 
 import BlogForm from "./BlogForm"
 
-test("Test 5.16: a valid blog content should be added after calling event handler once", () => {
+test("5.16: a valid blog content should be added after calling event handler once", () => {
   // const newBlog = {
   //   title: "Another one bits the dust",
   //   author: "Queen",
@@ -20,9 +20,18 @@ test("Test 5.16: a valid blog content should be added after calling event handle
   const sendButton = screen.getByText("SAVE")
 
   act(() => {
-    userEvent.type(screen.getByPlaceholderText("title", { exact: true }), "Another one bits the dust")
-    userEvent.type(screen.getByPlaceholderText("author", { exact: true }), "Queen")
-    userEvent.type(screen.getByPlaceholderText("url", { exact: true }), "england...")
+    userEvent.type(
+      screen.getByPlaceholderText("title", { exact: true }),
+      "Another one bits the dust"
+    )
+    userEvent.type(
+      screen.getByPlaceholderText("author", { exact: true }),
+      "Queen"
+    )
+    userEvent.type(
+      screen.getByPlaceholderText("url", { exact: true }),
+      "england..."
+    )
     userEvent.type(screen.getByPlaceholderText("likes", { exact: true }), 10)
   })
 
