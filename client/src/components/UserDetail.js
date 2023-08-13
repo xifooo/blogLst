@@ -11,17 +11,23 @@ const UserDetail = () => {
   }
 
   return (
-    <div>
-      <h1>{u.username}</h1>
-      <p>
-        <strong>added blogs</strong>
-      </p>
-      <ul>
-        {u.blogs.map((item) => (
-          <li key={item.id}>{item.title}</li>
-        ))}
-      </ul>
-    </div>
+    <section className="pl-16">
+      <div>
+        <h1 className="text-slate-800 font-serif underline">
+          {u.username}
+          <span className="inline-block ml-6">
+            <em>added blogs</em>
+          </span>
+        </h1>
+      </div>
+      <div>
+        <ol className="font-bold text-2xl">
+          {u.blogs.map((item) => (
+            <li key={item.id}>{item.title}</li>
+          ))}
+        </ol>
+      </div>
+    </section>
   )
 }
 

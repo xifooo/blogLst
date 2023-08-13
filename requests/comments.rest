@@ -1,0 +1,28 @@
+POST http://localhost:3003/api/blogs/64c28d59b007b0ae72a50505/comments
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGx0ZXIiLCJpZCI6IjY0YzI2MDJjNjZhYmY5Y2JkNmY3NTE0MiIsImlhdCI6MTY5MTMzMDA5NiwiZXhwIjoxNjkxMzMzNjk2fQ.4rIw0kKvCIt5q1OiZ-rKwr6n3O15tKyWcqIObhnmlww
+
+{
+    "content": "this is good"
+}
+
+###
+POST http://localhost:3003/api/blogs/?id=/comments
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGx0ZXIiLCJpZCI6IjY0YzI2MDJjNjZhYmY5Y2JkNmY3NTE0MiIsImlhdCI6MTY5MDQ3MDE4NSwiZXhwIjoxNjkwNDczNzg1fQ.Kw_QdO0ybmTTaSlC3nO45r42X0w1e4JF36DzeOuDH8Y
+
+{
+    "content": "lol"
+}
+
+###
+
+GET http://localhost:3003/api/blogs/64c28d59b007b0ae72a50505/comments
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGx0ZXIiLCJpZCI6IjY0YzI2MDJjNjZhYmY5Y2JkNmY3NTE0MiIsImlhdCI6MTY5MTMzMDA5NiwiZXhwIjoxNjkxMzMzNjk2fQ.4rIw0kKvCIt5q1OiZ-rKwr6n3O15tKyWcqIObhnmlww

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
     "dev": "cross-env NODE_ENV=development nodemon server.js",
+    "devTest": "cross-env NODE_ENV=test node server.js",
     "lint": "eslint .",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit",
     "start:test": "cross-env NODE_ENV=test node server.js"

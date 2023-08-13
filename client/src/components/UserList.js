@@ -16,12 +16,11 @@ const UserList = () => {
   const users = useSelector((state) => state.user.allUsers)
 
   return (
-    <div>
-      <h1>Users</h1>
-      <table>
+    <div className="ml-16">
+      <table className="table-auto">
         <thead>
           <tr>
-            <th> </th>
+            <th>Users</th>
             <th>blogs created</th>
           </tr>
         </thead>

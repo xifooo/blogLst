@@ -1,6 +1,8 @@
 GET http://localhost:3003/api/blogs HTTP/1.1
-
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGx0ZXIiLCJpZCI6IjY0NzQxNTE1YWU3NzBkZDk0ZWE3ZWYzYiIsImlhdCI6MTY4NjQ2NDA1NywiZXhwIjoxNjg2NDY3NjU3fQ.Kw6E69AXRQmuFiIAGYiwx4ubFrB29tzZRmWfpusIoIs
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGx0ZXIiLCJpZCI6IjY0YzI2MDJjNjZhYmY5Y2JkNmY3NTE0MiIsImlhdCI6MTY5MTMzMDA5NiwiZXhwIjoxNjkxMzMzNjk2fQ.4rIw0kKvCIt5q1OiZ-rKwr6n3O15tKyWcqIObhnmlww
 
 ###
 
@@ -9,6 +11,10 @@ GET http://localhost:3003/api/blogs/?id= HTTP/1.1
 ###
 
 GET http://localhost:3003/api/blogs/init-blogs/2 HTTP/1.1
+User-Agent: rest-client
+Accept-Language: en-GB,en-US;q=0.8,en;q=0.6,zh-CN;q=0.4
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbGx0ZXIiLCJpZCI6IjY0YzI2MDJjNjZhYmY5Y2JkNmY3NTE0MiIsImlhdCI6MTY5MTMzMDA5NiwiZXhwIjoxNjkxMzMzNjk2fQ.4rIw0kKvCIt5q1OiZ-rKwr6n3O15tKyWcqIObhnmlww
 
 ###
 

@@ -10,7 +10,7 @@ const requestLogger = (request, response, next) => {
 }
 
 const TokenExtractor = (req, res, next) => {
-  const authorization = req.get("authorization")
+  const authorization = req.get("Authorization")
 
   if (authorization && authorization.startsWith("Bearer ")) {
     const token = authorization.replace("Bearer ", "")

@@ -1,13 +1,13 @@
 const Footer = () => {
-  const footerStyle = {
-    color: "green",
-    fontStyle: "italic",
-    fontSize: 16,
-  }
+  // const footerStyle = {
+  //   color: "green",
+  //   fontStyle: "italic",
+  //   fontSize: 16,
+  // }
   return (
-    <div style={footerStyle}>
+    <div className="m-6 p-4 items-center justify-start gap-2">
       <br />
-      <em> BlogLst App </em>
+      <em className="text-slate-600 font-serif"> BlogLst App </em>
     </div>
   )
 }

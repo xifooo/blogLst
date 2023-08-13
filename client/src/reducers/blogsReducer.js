@@ -25,6 +25,15 @@ const blogsReducer = createSlice({
     setBlogs: (state, action) => {
       return action.payload
     },
+
+    appendComment: (state, action) => {
+      const newState = state.map((blog) =>
+        blog.id === action.payload.blogId
+          ? blog.comments.concat(action.payload.comment)
+          : blog
+      )
+      return newState
+    },
   },
 })
 
@@ -43,7 +52,7 @@ export const createBlog = (newObj) => {
     } catch (exception) {
       dispatch(
         sendToMessage(
-          `action creator > createBlog < encountered an error: #${exception}`,
+          `action creator > createBlog < encountered an error: ${exception}`,
           5
         )
       )
@@ -60,7 +69,7 @@ export const removeBlog = (blog) => {
     } catch (exception) {
       dispatch(
         sendToMessage(
-          `action creator > removeBlog < encountered an error: #${exception}`,
+          `action creator > removeBlog < encountered an error: ${exception}`,
           5
         )
       )
@@ -76,7 +85,7 @@ export const postOneLike = (id, changedObj) => {
     } catch (exception) {
       dispatch(
         sendToMessage(
-          `action creator > postOneLike < encountered an error: #${exception}`,
+          `action creator > postOneLike < encountered an error: ${exception}`,
           5
         )
       )
@@ -84,6 +93,31 @@ export const postOneLike = (id, changedObj) => {
   }
 }
 
-export const { appendBlog, deleteBlogById, alterBlog, clearBlogs, setBlogs } =
-  blogsReducer.actions
+export const postOneComment = (blogId, newComment) => {
+  return async (dispatch) => {
+    try {
+      const createdCommment = await blogService.createComment(
+        blogId,
+        newComment
+      )
+      dispatch(appendComment(blogId, createdCommment))
+    } catch (exception) {
+      dispatch(
+        sendToMessage(
+          `action creator > postOneComment < encountered an error: ${exception}`,
+          5
+        )
+      )
+    }
+  }
+}
+
+export const {
+  appendBlog,
+  deleteBlogById,
+  alterBlog,
+  clearBlogs,
+  setBlogs,
+  appendComment,
+} = blogsReducer.actions
 export default blogsReducer.reducer
